@@ -12,6 +12,11 @@ dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-rest'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
