@@ -1,13 +1,15 @@
 package org.clevacart.resource;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.clevacart.config.DatabaseConfig;
-import org.clevacart.domain.repository.DatabaseTest;
+import org.clevacart.domain.model.Allergen;
+import org.clevacart.domain.repository.AllergenRepository;
 import org.clevacart.service.DatabaseService;
+
+import java.util.List;
 
 @Path("/allergens")
 public class AllergenResource {
@@ -18,16 +20,36 @@ public class AllergenResource {
     @Inject
     DatabaseConfig databaseConfig;
 
+    @Inject
+    AllergenRepository allergenRepository;
+
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        DatabaseConfig.DatabaseConnectionProperties properties = databaseConfig.getDatabaseConnectionProperties();
-        return databaseTest.selectAllFromAllergens(databaseService, properties);
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getAllergens() {
+        List<String> allergens = allergenRepository.selectAllFromAllergens();
+        return Response.ok(allergens).build();
     }
 
-    DatabaseTest databaseTest = new DatabaseTest();
+    AllergenRepository databaseTest = new AllergenRepository();
 
-    public DatabaseTest getDatabaseTest() {
+    public AllergenRepository getDatabaseTest() {
         return databaseTest;
+    }
+
+    @Path("/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getAllergensById(@PathParam("id") int id) {
+        Allergen allergen = allergenRepository.getAllergensById(id);
+
+        if (allergen != null) {
+            return Response.ok(allergen).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("{\"error\":\"Allergen not found\"}")
+                    .build();
+        }
     }
 }

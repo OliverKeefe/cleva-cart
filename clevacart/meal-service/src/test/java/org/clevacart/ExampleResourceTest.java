@@ -9,12 +9,12 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusTest
 class ExampleResourceTest {
     @Test
-    void testHelloEndpoint() {
+    void testAllergenResource() {
         given()
-                .when().get("/hello")
+                .when().get("/allergens/1")
                 .then()
                 .statusCode(200)
-                .body(is("Hello from Quarkus REST"));
+                .body(is("Gluten"));
     }
 
 }

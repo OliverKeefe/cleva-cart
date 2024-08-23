@@ -23,6 +23,7 @@ public class DatabaseConfig {
 
     }
 
+    @ApplicationScoped
     public DatabaseConnectionProperties getDatabaseConnectionProperties() {
         return new DatabaseConnectionProperties(jdbcUrl, username, password);
     }

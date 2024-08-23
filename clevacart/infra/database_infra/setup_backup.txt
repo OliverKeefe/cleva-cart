@@ -65,7 +65,3 @@ CREATE TABLE Ingredient_Nutrient (
     FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id),
     FOREIGN KEY (nutrient_id) REFERENCES Nutrient(id)
 );
-
-INSERT INTO Ingredient_Nutrient (
-
-);
