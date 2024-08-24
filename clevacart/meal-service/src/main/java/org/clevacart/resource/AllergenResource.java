@@ -7,6 +7,8 @@ import jakarta.ws.rs.core.Response;
 import org.clevacart.config.DatabaseConfig;
 import org.clevacart.domain.model.Allergen;
 import org.clevacart.domain.repository.AllergenRepository;
+import org.clevacart.dto.mapper.AllergenMapper;
+import org.clevacart.dto.output.AllergenOutputDTO;
 import org.clevacart.service.DatabaseService;
 
 import java.util.List;
@@ -22,6 +24,9 @@ public class AllergenResource {
 
     @Inject
     AllergenRepository allergenRepository;
+
+    @Inject
+    AllergenMapper allergenMapper;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,7 +50,8 @@ public class AllergenResource {
         Allergen allergen = allergenRepository.getAllergensById(id);
 
         if (allergen != null) {
-            return Response.ok(allergen).build();
+            AllergenOutputDTO allergenOutputDTO = allergenMapper.toOutputDTO(allergen);
+            return Response.ok(allergenOutputDTO).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("{\"error\":\"Allergen not found\"}")
