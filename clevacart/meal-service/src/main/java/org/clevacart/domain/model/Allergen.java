@@ -1,10 +1,12 @@
 package org.clevacart.domain.model;
 
+import jakarta.inject.Singleton;
+
 public class Allergen {
     private int id;
     private String name;
 
-    public Allergen(int id, String name) {
+    public Allergen() {
         this.id = id;
         this.name = name;
     }

@@ -7,10 +7,9 @@ import jakarta.ws.rs.core.Response;
 import org.clevacart.config.DatabaseConfig;
 import org.clevacart.domain.model.Allergen;
 import org.clevacart.domain.repository.AllergenRepository;
-import org.clevacart.dto.mapper.AllergenMapper;
-import org.clevacart.dto.output.AllergenOutputDTO;
 import org.clevacart.service.DatabaseService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Path("/allergens")
@@ -24,9 +23,6 @@ public class AllergenResource {
 
     @Inject
     AllergenRepository allergenRepository;
-
-    @Inject
-    AllergenMapper allergenMapper;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,16 +38,57 @@ public class AllergenResource {
         return databaseTest;
     }
 
-    @Path("/{id}")
+    @Path("get-by-id/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getAllergensById(@PathParam("id") int id) {
-        Allergen allergen = allergenRepository.getAllergensById(id);
+        System.out.println("Received ID: " + id);
+        Allergen allergen;
+        try {
+            allergen = allergenRepository.getAllergensById(id);
+            System.out.println("Allergen retrieved: " + allergen);
+        } catch (Exception e) {
+            System.err.println("Exception occurred while retrieving allergen: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("{\"error\":\"Internal server error\"}")
+                    .build();
+        }
 
         if (allergen != null) {
-            AllergenOutputDTO allergenOutputDTO = allergenMapper.toOutputDTO(allergen);
-            return Response.ok(allergenOutputDTO).build();
+            return Response.ok(allergen.getName()).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("{\"error\":\"Allergen not found\"}")
+                    .build();
+        }
+    }
+
+    @Path("/test")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response test() throws SQLException {
+        Allergen allergen = allergenRepository.test();
+
+        if (allergen != null) {
+            return Response.ok(allergen.getName()).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("{\"error\":\"Allergen not found\"}")
+                    .build();
+        }
+    }
+
+    @Path("get-by-name/{name}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getAllergensByName(@PathParam("name") String name) throws SQLException {
+        Allergen allergen = allergenRepository.getAllergensByName(name);
+
+        if (allergen != null) {
+            return Response.ok(allergen.getName()).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("{\"error\":\"Allergen not found\"}")

@@ -5,6 +5,7 @@ import org.clevacart.config.DatabaseConfig;
 import org.intellij.lang.annotations.Language;
 
 import java.sql.*;
+import java.util.Arrays;
 
 import org.intellij.lang.annotations.Language;
 
@@ -22,6 +23,9 @@ public class DatabaseService {
     public ResultSet executeQuery(@Language("SQL") String sql, DatabaseConfig.DatabaseConnectionProperties properties, Object... parameters) throws SQLException {
         Connection connection = getConnection(properties);
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        System.out.println("Execute Query: " + preparedStatement);
+        System.out.println(Arrays.toString(parameters));
+
 
         for (int i = 0; i < parameters.length; i++) {
             preparedStatement.setObject(i + 1, parameters[i]);
@@ -30,7 +34,7 @@ public class DatabaseService {
         return preparedStatement.executeQuery();
     }
 
-    public int executeUpdate(String sql, DatabaseConfig.DatabaseConnectionProperties properties) throws SQLException {
+    public int executeUpdate(@Language("SQL") String sql, DatabaseConfig.DatabaseConnectionProperties properties) throws SQLException {
         Connection connection = getConnection(properties);
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         return preparedStatement.executeUpdate();
