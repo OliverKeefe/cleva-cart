@@ -5,16 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.equalTo;
 
 @QuarkusTest
-class ExampleResourceTest {
+public class AllergenResourceTest {
+
     @Test
-    void testAllergenResource() {
+    public void testAllergenResource() {
         given()
-                .when().get("/allergens/1")
+                .when().get("/get-by-name/gluten")
                 .then()
                 .statusCode(200)
-                .body(is("Gluten"));
+                .body("name", equalTo("Gluten"));
     }
-
 }

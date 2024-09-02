@@ -11,14 +11,20 @@ repositories {
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-arc'
-    implementation 'io.quarkus:quarkus-rest'
     implementation 'io.quarkus:quarkus-hibernate-validator'
+    implementation 'io.quarkus:quarkus-hibernate-orm:3.14.1'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation 'io.quarkus:quarkus-rest'
+    implementation 'io.quarkus:quarkus-rest-jackson'
 
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'io.quarkus:quarkus-jdbc-h2'
     implementation 'org.jetbrains:annotations:24.0.0'
     // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
     implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
+    // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
+    implementation 'javax.persistence:javax.persistence-api:2.2'
 
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
