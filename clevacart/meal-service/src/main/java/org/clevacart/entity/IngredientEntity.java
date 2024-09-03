@@ -16,11 +16,9 @@ public class IngredientEntity {
 
     private String name;
 
-    // Default constructor required by JPA
     public IngredientEntity() {
     }
 
-    // Constructor with name parameter
     public IngredientEntity(String name) {
         this.name = name;
     }

@@ -5,26 +5,26 @@ import jakarta.json.JsonObject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.clevacart.service.AllergenService;
+import org.clevacart.service.NutrientService;
 
-@Path("/allergens")
-public class AllergenResource {
+@Path("/nutrients")
+public class NutrientResource {
 
     @Inject
-    AllergenService allergenService;
+    NutrientService nutrientService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllergens() {
-        JsonObject allergens = allergenService.getAllAllergens();
+        JsonObject allergens = nutrientService.getAllNutrients();
         return Response.ok(allergens).build();
     }
 
     @Path("/get-by-id/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllergenById(@PathParam("id") int id) {
-        JsonObject allergen = allergenService.getAllergenById(id);
+    public Response getNutrientById(@PathParam("id") int id) {
+        JsonObject allergen = nutrientService.getNutrientById(id);
         return Response.ok(allergen).build();
     }
 
@@ -32,8 +32,8 @@ public class AllergenResource {
     @Path("/get-by-name/{name}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllergenByName(@PathParam("name") String name) {
-        JsonObject allergen = allergenService.getAllergenByName(name);
+    public Response getNutrientByName(@PathParam("name") String name) {
+        JsonObject allergen = nutrientService.getNutrientByName(name);
         return Response.ok(allergen).build();
     }
 
