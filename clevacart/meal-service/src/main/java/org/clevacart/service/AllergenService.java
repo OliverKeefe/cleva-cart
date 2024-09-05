@@ -8,26 +8,23 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 import org.clevacart.entity.AllergenEntity;
 
 import java.util.List;
 
 @ApplicationScoped
-public class AllergenService {
+public class AllergenService extends BaseService<AllergenEntity> {
 
-    @Inject
-    EntityManager entityManager;
-
-    public JsonObject getAllAllergens() {
-        TypedQuery<AllergenEntity> query = entityManager.createQuery("SELECT a FROM AllergenEntity a", AllergenEntity.class);
-        List<AllergenEntity> allergens = query.getResultList();
+    @Override
+    public JsonObject getAll() {
+        List<AllergenEntity> allergens = entityManager.createQuery("SELECT a FROM AllergenEntity a", AllergenEntity.class)
+                .getResultList();
 
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         for (AllergenEntity allergen : allergens) {
             JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder()
                     .add("id", allergen.getId())
-                    .add("name", allergen.getName());
+                    .add("name", allergen.getName() != null ? allergen.getName() : "Unknown");
             jsonArrayBuilder.add(jsonObjectBuilder);
         }
 
@@ -36,35 +33,31 @@ public class AllergenService {
                 .build();
     }
 
-    public JsonObject getAllergenById(int id) {
-        AllergenEntity allergen = entityManager.find(AllergenEntity.class, id);
+    @Override
+    public JsonObject getById(int id) {
+        AllergenEntity allergen = findEntityById(AllergenEntity.class, id);
         if (allergen != null) {
-            return Json.createObjectBuilder()
-                    .add("id", allergen.getId())
-                    .add("name", allergen.getName())
-                    .build();
+            return createJson(
+                    Json.createObjectBuilder()
+                            .add("id", allergen.getId())
+                            .add("name", allergen.getName())
+            );
         } else {
-            return Json.createObjectBuilder()
-                    .add("error", "Allergen not found")
-                    .build();
+            return createJsonError("Allergen not found").build();
         }
     }
 
-    public JsonObject getAllergenByName(String name) {
-        TypedQuery<AllergenEntity> query = entityManager.createQuery(
-                "SELECT a FROM AllergenEntity a WHERE a.name = :name", AllergenEntity.class);
-        query.setParameter("name", name);
-
+    @Override
+    public JsonObject getByName(String name) {
         try {
-            AllergenEntity allergen = query.getSingleResult();
-            return Json.createObjectBuilder()
-                    .add("id", allergen.getId())
-                    .add("name", allergen.getName())
-                    .build();
+            AllergenEntity allergen = findEntityByField(AllergenEntity.class, "name", name);
+            return createJson(
+                    Json.createObjectBuilder()
+                            .add("id", allergen.getId())
+                            .add("name", allergen.getName())
+            );
         } catch (NoResultException e) {
-            return Json.createObjectBuilder()
-                    .add("error", "Allergen not found")
-                    .build();
+            return createJsonError("Allergen not found").build();
         }
     }
 }

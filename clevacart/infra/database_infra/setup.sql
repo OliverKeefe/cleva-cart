@@ -66,6 +66,10 @@ CREATE TABLE Ingredient_Nutrient (
     FOREIGN KEY (nutrient_id) REFERENCES Nutrient(id)
 );
 
--- INSERT INTO Ingredient_Nutrient (
-
--- );
+CREATE TABLE Ingredient_Allergen (
+    ingredient_id INT,
+    allergen_id INT,
+    PRIMARY KEY (ingredient_id, allergen_id),
+    FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id),
+    FOREIGN KEY (allergen_id) REFERENCES Allergen(id)
+);

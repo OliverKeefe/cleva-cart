@@ -1,20 +1,34 @@
 package org.clevacart.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Ingredient")
-public class IngredientEntity {
+public class IngredientEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Ingredient_Nutrient",
+            joinColumns = @JoinColumn(name = "ingredient_id"),
+            inverseJoinColumns = @JoinColumn(name = "nutrient_id")
+    )
+    private List<NutrientEntity> nutrients;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Ingredient_Allergen",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
+    private List<AllergenEntity> allergens;
 
     public IngredientEntity() {
     }
@@ -23,18 +37,22 @@ public class IngredientEntity {
         this.name = name;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }

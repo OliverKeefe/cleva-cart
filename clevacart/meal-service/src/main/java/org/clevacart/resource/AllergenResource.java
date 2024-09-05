@@ -16,7 +16,7 @@ public class AllergenResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllergens() {
-        JsonObject allergens = allergenService.getAllAllergens();
+        JsonObject allergens = allergenService.getAll();
         return Response.ok(allergens).build();
     }
 
@@ -24,7 +24,7 @@ public class AllergenResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllergenById(@PathParam("id") int id) {
-        JsonObject allergen = allergenService.getAllergenById(id);
+        JsonObject allergen = allergenService.getById(id);
         return Response.ok(allergen).build();
     }
 
@@ -33,7 +33,7 @@ public class AllergenResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllergenByName(@PathParam("name") String name) {
-        JsonObject allergen = allergenService.getAllergenByName(name);
+        JsonObject allergen = allergenService.getByName(name);
         return Response.ok(allergen).build();
     }
 
