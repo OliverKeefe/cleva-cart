@@ -1,9 +1,7 @@
 package org.clevacart.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.persistence.EntityManager;
@@ -13,7 +11,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
-import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseService<T> {
 
@@ -36,11 +34,7 @@ public abstract class BaseService<T> {
         return entityManager.find(entityClass, id);
     }
 
-    protected T findEntityByField(Class<T> entityClass, String field, String value) throws NoResultException {
-        //TypedQuery<T> query = entityManager.createQuery(
-        //        "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e." + field + " = :value", entityClass);
-        //query.setParameter("value", value);
-        //return query.getSingleResult();
+    protected <V> Optional<T> findEntityByField(Class<T> entityClass, String field, V value) throws NoResultException {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<T> root = criteriaQuery.from(entityClass);
@@ -48,8 +42,12 @@ public abstract class BaseService<T> {
         criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(field), value));
 
         TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
-        return query.getSingleResult();
 
+        try {
+            return Optional.of(query.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 
     public abstract JsonObject getAll();

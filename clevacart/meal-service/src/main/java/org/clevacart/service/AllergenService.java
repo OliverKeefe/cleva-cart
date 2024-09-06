@@ -1,16 +1,16 @@
 package org.clevacart.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import org.clevacart.entity.AllergenEntity;
+import org.clevacart.entity.RecipeEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class AllergenService extends BaseService<AllergenEntity> {
@@ -49,14 +49,16 @@ public class AllergenService extends BaseService<AllergenEntity> {
 
     @Override
     public JsonObject getByName(String name) {
-        try {
-            AllergenEntity allergen = findEntityByField(AllergenEntity.class, "name", name);
+        Optional<AllergenEntity> allergenOpt = findEntityByField(AllergenEntity.class, "ingredients", name);
+        if (allergenOpt.isPresent()) {
+            AllergenEntity allergen = allergenOpt.get();
+
             return createJson(
                     Json.createObjectBuilder()
                             .add("id", allergen.getId())
                             .add("name", allergen.getName())
             );
-        } catch (NoResultException e) {
+        } else {
             return createJsonError("Allergen not found").build();
         }
     }

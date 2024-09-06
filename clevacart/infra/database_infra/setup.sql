@@ -7,6 +7,52 @@ CREATE TABLE Allergen (
                           name VARCHAR(17) NOT NULL
 );
 
+CREATE TABLE Ingredient (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            name VARCHAR(50) NOT NULL,
+                            allergen_id INT,  -- Foreign key to Allergen table
+                            nutrient_id INT,  -- Foreign key to Nutrient table
+                            FOREIGN KEY (allergen_id) REFERENCES Allergen(id),
+                            FOREIGN KEY (nutrient_id) REFERENCES Nutrient(id)
+);
+
+CREATE TABLE Nutrient (
+                          id INT AUTO_INCREMENT PRIMARY KEY,
+                          name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Recipe (
+                        id INT AUTO_INCREMENT,
+                        name VARCHAR(35) NOT NULL,
+                        cooking_instructions TEXT,
+                        PRIMARY KEY(id)
+);
+
+CREATE TABLE Ingredient_Nutrient (
+                                     ingredient_id INT,
+                                     nutrient_id INT,
+                                     PRIMARY KEY (ingredient_id, nutrient_id),
+                                     FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id),
+                                     FOREIGN KEY (nutrient_id) REFERENCES Nutrient(id)
+);
+
+CREATE TABLE Ingredient_Allergen (
+                                     ingredient_id INT,
+                                     allergen_id INT,
+                                     PRIMARY KEY (ingredient_id, allergen_id),
+                                     FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id),
+                                     FOREIGN KEY (allergen_id) REFERENCES Allergen(id)
+);
+
+CREATE TABLE Recipe_Ingredient (
+                                   recipe_id INT,
+                                   ingredient_id INT,
+                                   PRIMARY KEY (recipe_id, ingredient_id),
+                                   FOREIGN KEY (recipe_id) REFERENCES Recipe(id),
+                                   FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id)
+);
+
+
 -- Insert Allergen Data
 INSERT INTO Allergen (name)
 VALUES
@@ -26,11 +72,6 @@ VALUES
     ('Sulphites'),
     ('No Major Allergen');  -- Add "No Major Allergen" to the Allergen table
 
-CREATE TABLE Nutrient (
-                          id INT AUTO_INCREMENT PRIMARY KEY,
-                          name VARCHAR(50) NOT NULL
-);
-
 INSERT INTO Nutrient (name)
 VALUES
     ('Vitamin C'),
@@ -39,17 +80,6 @@ VALUES
     ('Magnesium'),
     ('Iron');
 
--- Ingredient Table
-CREATE TABLE Ingredient (
-                            id INT AUTO_INCREMENT PRIMARY KEY,
-                            name VARCHAR(50) NOT NULL,
-                            allergen_id INT,  -- Foreign key to Allergen table
-                            nutrient_id INT,  -- Foreign key to Nutrient table
-                            FOREIGN KEY (allergen_id) REFERENCES Allergen(id),
-                            FOREIGN KEY (nutrient_id) REFERENCES Nutrient(id)
-);
-
--- Insert Ingredients
 -- For ingredients with allergens, reference the corresponding allergen_id
 INSERT INTO Ingredient (name, allergen_id)
 VALUES
@@ -58,18 +88,7 @@ VALUES
     ('Carrot', (SELECT id FROM Allergen WHERE name = 'No Major Allergen'));
 
 
-CREATE TABLE Ingredient_Nutrient (
-    ingredient_id INT,
-    nutrient_id INT,
-    PRIMARY KEY (ingredient_id, nutrient_id),
-    FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id),
-    FOREIGN KEY (nutrient_id) REFERENCES Nutrient(id)
-);
 
-CREATE TABLE Ingredient_Allergen (
-    ingredient_id INT,
-    allergen_id INT,
-    PRIMARY KEY (ingredient_id, allergen_id),
-    FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id),
-    FOREIGN KEY (allergen_id) REFERENCES Allergen(id)
-);
+
+
+

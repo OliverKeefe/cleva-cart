@@ -1,24 +1,34 @@
 package org.clevacart.entity;
 
-import jakarta.persistence.*;
-
-import javax.persistence.Entity;
-import java.util.ArrayList;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import java.util.List;
 
 @Entity
 @Table(name = "Recipe")
 public class RecipeEntity extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
-    private ArrayList<String> cookingInstructions;
+    @Column(name = "cooking_instructions", columnDefinition = "TEXT")
+    private String cookingInstructions;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(
+            name = "Recipe_Ingredient",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
     private List<IngredientEntity> ingredients;
 
     @Override
@@ -41,15 +51,19 @@ public class RecipeEntity extends BaseEntity {
         this.name = name;
     }
 
-    public ArrayList<String> getCookingInstructions() {
+    public String getCookingInstructions() {
         return this.cookingInstructions;
     }
 
-    public void setCookingInstructions(ArrayList<String> cookingInstructions) {
+    public void setCookingInstructions(String cookingInstructions) {
         this.cookingInstructions = cookingInstructions;
     }
 
-    public void setIngredients(List<IngredientEntity> ingredients) {
+    public List<IngredientEntity> getIngredients() {
+        return ingredients;
+    }
 
+    public void setIngredients(List<IngredientEntity> ingredients) {
+        this.ingredients = ingredients;
     }
 }

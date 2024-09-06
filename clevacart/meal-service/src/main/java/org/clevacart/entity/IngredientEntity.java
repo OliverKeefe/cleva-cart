@@ -1,18 +1,20 @@
 package org.clevacart.entity;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
 @Table(name = "Ingredient")
-public class IngredientEntity extends BaseEntity{
+public class IngredientEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
+
+    //@ManyToMany(mappedBy = "ingredients")
+    //private List<RecipeEntity> recipes;
 
     @ManyToMany
     @JoinTable(
@@ -25,8 +27,8 @@ public class IngredientEntity extends BaseEntity{
     @ManyToMany
     @JoinTable(
             name = "Ingredient_Allergen",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+            joinColumns = @JoinColumn(name = "ingredient_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergen_id")
     )
     private List<AllergenEntity> allergens;
 
