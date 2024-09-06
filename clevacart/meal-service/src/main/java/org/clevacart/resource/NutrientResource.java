@@ -15,17 +15,17 @@ public class NutrientResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllergens() {
-        JsonObject allergens = nutrientService.getAllNutrients();
-        return Response.ok(allergens).build();
+    public Response getNutrients() {
+        JsonObject nutrients = nutrientService.getAllNutrients();
+        return Response.ok(nutrients).build();
     }
 
     @Path("/get-by-id/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNutrientById(@PathParam("id") int id) {
-        JsonObject allergen = nutrientService.getNutrientById(id);
-        return Response.ok(allergen).build();
+    JsonObject nutrient = nutrientService.getNutrientById(id);
+        return Response.ok(nutrient).build();
     }
 
 
@@ -33,8 +33,8 @@ public class NutrientResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNutrientByName(@PathParam("name") String name) {
-        JsonObject allergen = nutrientService.getNutrientByName(name);
-        return Response.ok(allergen).build();
+        JsonObject nutrient = nutrientService.getNutrientByName(name);
+        return Response.ok(nutrient).build();
     }
 
 }
