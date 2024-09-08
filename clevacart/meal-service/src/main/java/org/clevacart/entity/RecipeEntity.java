@@ -1,5 +1,6 @@
 package org.clevacart.entity;
 
+import jakarta.json.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -9,6 +10,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import org.h2.util.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +33,7 @@ public class RecipeEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private List<IngredientEntity> ingredients;
+    private List<IngredientEntity> ingredients = new ArrayList<>();
 
     @Override
     public int getId() {
@@ -60,6 +64,9 @@ public class RecipeEntity extends BaseEntity {
     }
 
     public List<IngredientEntity> getIngredients() {
+        if (ingredients == null) {
+            ingredients = new ArrayList<>();
+        }
         return ingredients;
     }
 

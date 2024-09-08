@@ -44,7 +44,7 @@ public class RecipeResource {
     @Path("/add")
     @Consumes("application/json")
     public Response addRecipe(RecipeDTO recipeDTO) {
-        JsonObject recipe = recipeService.addRecipe(recipeDTO.getName(), recipeDTO.getCookingInstructions());
+        JsonObject recipe = recipeService.addRecipe(recipeDTO);
         return Response.ok(recipe).build();
     }
 }

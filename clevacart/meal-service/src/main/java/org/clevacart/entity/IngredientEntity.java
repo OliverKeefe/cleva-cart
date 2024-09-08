@@ -13,8 +13,8 @@ public class IngredientEntity extends BaseEntity {
 
     private String name;
 
-    //@ManyToMany(mappedBy = "ingredients")
-    //private List<RecipeEntity> recipes;
+    @ManyToMany(mappedBy = "ingredients")
+    private List<RecipeEntity> recipes;
 
     @ManyToMany
     @JoinTable(

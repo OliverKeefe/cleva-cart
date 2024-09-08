@@ -34,6 +34,14 @@ public abstract class BaseService<T> {
         return entityManager.find(entityClass, id);
     }
 
+    /**
+     * Queries the Service database by optional field.
+     * @param entityClass
+     * @param field
+     * @param value
+     * @return {@link Optional}
+     * @throws NoResultException
+     */
     protected <V> Optional<T> findEntityByField(Class<T> entityClass, String field, V value) throws NoResultException {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);

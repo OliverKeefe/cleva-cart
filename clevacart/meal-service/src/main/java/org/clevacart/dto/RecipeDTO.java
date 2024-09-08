@@ -10,9 +10,9 @@ import java.util.List;
 public class RecipeDTO {
     private String name;
     private String cookingInstructions;
-    private List<IngredientEntity> ingredients;
+    private List<IngredientDTO> ingredients;
 
-    // Getters and setters
+
     public String getName() {
         return name;
     }
@@ -29,11 +29,11 @@ public class RecipeDTO {
         this.cookingInstructions = cookingInstructions;
     }
 
-    public List<IngredientEntity> getIngredients() {
+    public List<IngredientDTO> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<IngredientEntity> ingredients) {
+    public void setIngredients(List<IngredientDTO> ingredients) {
         this.ingredients = ingredients;
     }
 }

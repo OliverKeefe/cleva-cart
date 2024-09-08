@@ -67,4 +67,8 @@ public class IngredientService {
                     .build();
         }
     }
+
+    public void addIngredient(String name) {
+
+    }
 }
