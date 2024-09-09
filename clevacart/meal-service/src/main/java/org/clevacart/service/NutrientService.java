@@ -74,4 +74,8 @@ public class NutrientService extends BaseService<NutrientEntity> {
                 return createJsonError("Nutrient not found");
             }
     }
+
+    public int deleteByName(String name) {
+        return deleteByField(NutrientEntity.class, "name", name);
+    }
 }
