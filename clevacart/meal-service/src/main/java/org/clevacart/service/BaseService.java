@@ -8,9 +8,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public abstract class BaseService<T> {
@@ -18,9 +21,10 @@ public abstract class BaseService<T> {
     @Inject
     protected EntityManager entityManager;
 
-    protected JsonObjectBuilder createJsonError(String errorMessage) {
+    protected JsonObject createJsonError(String errorMessage) {
         return Json.createObjectBuilder()
-                .add("error", errorMessage);
+                .add("error", errorMessage)
+                .build();
     }
 
     protected JsonObject createJson(JsonObjectBuilder jsonBuilder) {
@@ -32,6 +36,16 @@ public abstract class BaseService<T> {
 
     protected T findEntityById(Class<T> entityClass, int id) {
         return entityManager.find(entityClass, id);
+    }
+
+    protected List<T> findAllByEntity(Class<T> entityClass) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
+        Root<T> root = criteriaQuery.from(entityClass);
+
+        criteriaQuery.select(root);
+
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     /**
@@ -58,9 +72,22 @@ public abstract class BaseService<T> {
         }
     }
 
+    @Transactional
+    protected <V> int deleteByField(Class<T> entityClass, String field, V value) throws NoResultException {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaDelete<T> criteriaDelete = criteriaBuilder.createCriteriaDelete(entityClass);
+        Root<T> root = criteriaDelete.from(entityClass);
+
+        criteriaDelete.where(criteriaBuilder.equal(root.get(field), value));
+
+        return entityManager.createQuery(criteriaDelete).executeUpdate();
+    }
+
     public abstract JsonObject getAll();
 
     public abstract JsonObject getById(int id);
 
     public abstract JsonObject getByName(String name);
+
+
 }
