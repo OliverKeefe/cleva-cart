@@ -1,7 +1,6 @@
 package org.clevacart.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
@@ -28,13 +27,12 @@ public class RecipeService extends BaseService<RecipeEntity> {
     @PersistenceContext
     EntityManager entityManager;
 
-
     @Override
-    public JsonObject getAll() {
-        List<RecipeEntity> recipes = entityManager.createQuery("SELECT a FROM RecipeEntity a", RecipeEntity.class)
-                .getResultList();
+    public JsonObject getAll() throws NoResultException{
+        List<RecipeEntity> recipes = findAllByEntity(RecipeEntity.class);
 
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+
         for (RecipeEntity recipe : recipes) {
             JsonArrayBuilder ingredientArrayBuilder = Json.createArrayBuilder();
 
@@ -54,16 +52,20 @@ public class RecipeService extends BaseService<RecipeEntity> {
 
             jsonArrayBuilder.add(jsonObjectBuilder);
         }
-
-        return Json.createObjectBuilder()
-                .add("recipes", jsonArrayBuilder)
-                .build();
+        try {
+            return createJson(
+                    Json.createObjectBuilder()
+                            .add("recipes", jsonArrayBuilder)
+            );
+        } catch (NoResultException e) {
+            return createJsonError("No recipes found.");
+        }
     }
-
 
     @Override
     public JsonObject getById(int id) {
         RecipeEntity recipe = findEntityById(RecipeEntity.class, id);
+
         if (recipe != null) {
             return createJson(
                     Json.createObjectBuilder()
@@ -72,14 +74,16 @@ public class RecipeService extends BaseService<RecipeEntity> {
                             .add("cooking_instructions", recipe.getCookingInstructions())
                             .add("ingredients", recipe.getIngredients().toString())
             );
+
         } else {
-            return createJsonError("Recipe not found").build();
+            return createJsonError("Recipe not found");
         }
     }
 
     @Override
     public JsonObject getByName(String name) {
         Optional<RecipeEntity> recipeOpt = findEntityByField(RecipeEntity.class, "name", name);
+
         if (recipeOpt.isPresent()) {
             RecipeEntity recipe = recipeOpt.get();
 
@@ -91,13 +95,13 @@ public class RecipeService extends BaseService<RecipeEntity> {
                             .add("ingredients", recipe.getIngredients().toString())
             );
         } else {
-            return createJsonError("Recipe not found").build();
+            return createJsonError("Recipe not found");
         }
     }
 
-
     public JsonObject getByIngredients(int ingredientId) {
         Optional<RecipeEntity> recipeOpt = findEntityByField(RecipeEntity.class, "ingredients", ingredientId);
+
         if (recipeOpt.isPresent()) {
             RecipeEntity recipe = recipeOpt.get();
 
@@ -108,7 +112,7 @@ public class RecipeService extends BaseService<RecipeEntity> {
                             .add("ingredients", recipe.getIngredients().toString())
             );
         } else {
-            return createJsonError("Recipe not found").build();
+            return createJsonError("Recipe not found");
         }
     }
 
@@ -131,19 +135,18 @@ public class RecipeService extends BaseService<RecipeEntity> {
                     CriteriaQuery<IngredientEntity> criteriaQuery = criteriaBuilder.createQuery(IngredientEntity.class);
                     Root<IngredientEntity> root = criteriaQuery.from(IngredientEntity.class);
 
-                    // Check if the ingredient exists in the database
-                    //existingIngredient = entityManager.createQuery(
-                    //                "SELECT i FROM IngredientEntity i WHERE i.name = :name", IngredientEntity.class)
-                    //        .setParameter("name", ingredientDTO.getName())
-                    //        .getSingleResult();
                     criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("name"), ingredientDTO.getName()));
+
                     TypedQuery<IngredientEntity> query = entityManager.createQuery(criteriaQuery);
+
                     existingIngredient = query.getSingleResult();
 
                 } catch (NoResultException e) {
                     // If the ingredient doesn't exist in the Ingredient table in DB, then create new entry
                     existingIngredient = new IngredientEntity();
+
                     existingIngredient.setName(ingredientDTO.getName());
+
                     entityManager.persist(existingIngredient);
                 }
 
@@ -153,11 +156,11 @@ public class RecipeService extends BaseService<RecipeEntity> {
 
         entityManager.persist(recipe);
 
-        return Json.createObjectBuilder()
+        return createJson(Json.createObjectBuilder()
                 .add("id", recipe.getId())
                 .add("name", recipe.getName())
                 .add("cooking_instructions", recipe.getCookingInstructions())
                 .add("ingredients", recipe.getIngredients().toString())
-                .build();
+        );
     }
 }
