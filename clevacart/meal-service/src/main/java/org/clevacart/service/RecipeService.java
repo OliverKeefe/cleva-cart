@@ -76,7 +76,7 @@ public class RecipeService extends BaseService<RecipeEntity> {
             );
 
         } else {
-            return createJsonError("Recipe not found");
+            return createJsonError("Recipe not found.");
         }
     }
 
@@ -95,7 +95,7 @@ public class RecipeService extends BaseService<RecipeEntity> {
                             .add("ingredients", recipe.getIngredients().toString())
             );
         } else {
-            return createJsonError("Recipe not found");
+            return createJsonError("Recipe not found.");
         }
     }
 
@@ -112,7 +112,7 @@ public class RecipeService extends BaseService<RecipeEntity> {
                             .add("ingredients", recipe.getIngredients().toString())
             );
         } else {
-            return createJsonError("Recipe not found");
+            return createJsonError("Recipe not found.");
         }
     }
 
