@@ -17,8 +17,7 @@ public class AllergenService extends BaseService<AllergenEntity> {
 
     @Override
     public JsonObject getAll() {
-        List<AllergenEntity> allergens = entityManager.createQuery("SELECT a FROM AllergenEntity a", AllergenEntity.class)
-                .getResultList();
+        List<AllergenEntity> allergens = findAllByEntity(AllergenEntity.class);
 
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         for (AllergenEntity allergen : allergens) {
@@ -28,9 +27,10 @@ public class AllergenService extends BaseService<AllergenEntity> {
             jsonArrayBuilder.add(jsonObjectBuilder);
         }
 
-        return Json.createObjectBuilder()
-                .add("allergens", jsonArrayBuilder)
-                .build();
+        return createJson(
+                Json.createObjectBuilder()
+                        .add("allergens", jsonArrayBuilder)
+                );
     }
 
     @Override
@@ -43,7 +43,7 @@ public class AllergenService extends BaseService<AllergenEntity> {
                             .add("name", allergen.getName())
             );
         } else {
-            return createJsonError("Allergen not found").build();
+            return createJsonError("Allergen not found");
         }
     }
 
@@ -59,7 +59,7 @@ public class AllergenService extends BaseService<AllergenEntity> {
                             .add("name", allergen.getName())
             );
         } else {
-            return createJsonError("Allergen not found").build();
+            return createJsonError("Allergen not found");
         }
     }
 }
