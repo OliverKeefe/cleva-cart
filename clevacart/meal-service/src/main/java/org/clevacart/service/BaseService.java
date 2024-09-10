@@ -21,6 +21,9 @@ public abstract class BaseService<T> {
     @Inject
     protected EntityManager entityManager;
 
+    public BaseService() {
+    }
+
     protected JsonObject createJsonError(String errorMessage) {
         return Json.createObjectBuilder()
                 .add("error", errorMessage)
@@ -56,7 +59,7 @@ public abstract class BaseService<T> {
      * @return {@link Optional}
      * @throws NoResultException
      */
-    protected <V> Optional<T> findEntityByField(Class<T> entityClass, String field, V value) throws NoResultException {
+    protected <V> Optional<T> findSingleEntityByField(Class<T> entityClass, String field, V value) throws NoResultException {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<T> root = criteriaQuery.from(entityClass);
@@ -70,6 +73,21 @@ public abstract class BaseService<T> {
         } catch (NoResultException e) {
             return Optional.empty();
         }
+    }
+
+
+
+    protected <V> List<Optional<T>> findEntityByField(Class<T> entityClass, String field, V value) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
+        Root<T> root = criteriaQuery.from(entityClass);
+
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(field), value));
+
+        List<T> resultList = entityManager.createQuery(criteriaQuery).getResultList();
+        return resultList.stream()
+                .map(Optional::ofNullable)
+                .toList();
     }
 
     @Transactional

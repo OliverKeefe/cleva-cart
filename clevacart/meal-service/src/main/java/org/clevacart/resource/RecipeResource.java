@@ -31,15 +31,14 @@ public class RecipeResource {
         return Response.ok(recipes).build();
     }
 
-    @Path("/get-by-name/{name}")
+    @Path("/get-by-name")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecipeByName(@PathParam("name") String name) {
+    public Response getRecipeByName(@QueryParam("name") String name) {
         JsonObject recipe = recipeService.getByName(name);
         return Response.ok(recipe).build();
     }
 
-    // TODO: Add functionality to handle List<IngredientEntity>.
     @POST
     @Path("/add")
     @Consumes("application/json")

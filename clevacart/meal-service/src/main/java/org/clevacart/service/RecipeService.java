@@ -82,25 +82,31 @@ public class RecipeService extends BaseService<RecipeEntity> {
 
     @Override
     public JsonObject getByName(String name) {
-        Optional<RecipeEntity> recipeOpt = findEntityByField(RecipeEntity.class, "name", name);
+        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+        List<Optional<RecipeEntity>> recipeOptionalList = findEntityByField(RecipeEntity.class, "name", name);
 
-        if (recipeOpt.isPresent()) {
-            RecipeEntity recipe = recipeOpt.get();
+        for (Optional<RecipeEntity> recipeEntityOptional : recipeOptionalList) {
+            if (recipeEntityOptional.isPresent()) {
+                RecipeEntity recipe = recipeEntityOptional.get();
 
-            return createJson(
-                    Json.createObjectBuilder()
-                            .add("id", recipe.getId())
-                            .add("name", recipe.getName())
-                            .add("cooking_instructions", recipe.getIngredients().toString())
-                            .add("ingredients", recipe.getIngredients().toString())
-            );
-        } else {
-            return createJsonError("Recipe not found.");
+                jsonArrayBuilder.add(Json.createObjectBuilder()
+                        .add("id", recipe.getId())
+                        .add("name", recipe.getName())
+                        .add("cooking_instructions", recipe.getCookingInstructions())
+                        .add("ingredients", recipe.getIngredients().toString())
+                );
+
+            } else {
+                return createJsonError("Recipe not found.");
+            }
         }
+
+        return createJson(Json.createObjectBuilder()
+                .add("recipes", jsonArrayBuilder));
     }
 
     public JsonObject getByIngredients(int ingredientId) {
-        Optional<RecipeEntity> recipeOpt = findEntityByField(RecipeEntity.class, "ingredients", ingredientId);
+        Optional<RecipeEntity> recipeOpt = findSingleEntityByField(RecipeEntity.class, "ingredients", ingredientId);
 
         if (recipeOpt.isPresent()) {
             RecipeEntity recipe = recipeOpt.get();

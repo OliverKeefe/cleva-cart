@@ -8,9 +8,7 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 import org.clevacart.entity.NutrientEntity;
-import org.clevacart.entity.RecipeEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +54,7 @@ public class NutrientService extends BaseService<NutrientEntity> {
     }
 
     public JsonObject getByName(String name) {
-        Optional<NutrientEntity> nutrientEntityOptional = findEntityByField(NutrientEntity.class, "name", name);
+        Optional<NutrientEntity> nutrientEntityOptional = findSingleEntityByField(NutrientEntity.class, "name", name);
 
         if (nutrientEntityOptional.isPresent()) {
             NutrientEntity nutrient = nutrientEntityOptional.get();

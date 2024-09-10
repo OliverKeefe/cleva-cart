@@ -5,9 +5,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
-import jakarta.persistence.NoResultException;
 import org.clevacart.entity.AllergenEntity;
-import org.clevacart.entity.RecipeEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,9 +47,9 @@ public class AllergenService extends BaseService<AllergenEntity> {
 
     @Override
     public JsonObject getByName(String name) {
-        Optional<AllergenEntity> allergenOpt = findEntityByField(AllergenEntity.class, "ingredients", name);
-        if (allergenOpt.isPresent()) {
-            AllergenEntity allergen = allergenOpt.get();
+        Optional<AllergenEntity> allergenEntityOptional = findSingleEntityByField(AllergenEntity.class, "name", name);
+        if (allergenEntityOptional.isPresent()) {
+            AllergenEntity allergen = allergenEntityOptional.get();
 
             return createJson(
                     Json.createObjectBuilder()

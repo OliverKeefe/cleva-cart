@@ -16,7 +16,7 @@ public class IngredientResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getIngredients() {
-        JsonObject ingredients = ingredientService.getAllIngredients();
+        JsonObject ingredients = ingredientService.getAll();
         return Response.ok(ingredients).build();
     }
 
@@ -24,7 +24,7 @@ public class IngredientResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getIngredientById(@PathParam("id") int id) {
-        JsonObject ingredient = ingredientService.getIngredientById(id);
+        JsonObject ingredient = ingredientService.getById(id);
         return Response.ok(ingredient).build();
     }
 
@@ -33,7 +33,7 @@ public class IngredientResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getIngredientByName(@PathParam("name") String name) {
-        JsonObject ingredient = ingredientService.getIngredientByName(name);
+        JsonObject ingredient = ingredientService.getByName(name);
         return Response.ok(ingredient).build();
     }
 
