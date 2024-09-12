@@ -7,13 +7,13 @@ import jakarta.json.JsonObjectBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaDelete;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
+import org.clevacart.dto.RecipeFilterDTO;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public abstract class BaseService<T> {
@@ -75,6 +75,28 @@ public abstract class BaseService<T> {
         }
     }
 
+    protected Optional<List<T>> findEntity(Class<T> entityClass, Map<String, Object> filters) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> query = criteriaBuilder.createQuery(entityClass);
+        Root<T> root = query.from(entityClass);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        for (Map.Entry<String, Object> filter : filters.entrySet()) {
+            String fieldName = filter.getKey();
+            Object fieldValue = filter.getValue();
+
+            if (fieldValue != null) {
+                predicates.add(criteriaBuilder.equal(root.get(fieldName), fieldValue));
+            }
+        }
+
+        query.select(root).where(predicates.toArray(new Predicate[0]));
+
+        List<T> results = entityManager.createQuery(query).getResultList();
+
+        return Optional.ofNullable(results.isEmpty() ? null : results);
+    }
 
 
     protected <V> List<Optional<T>> findEntityByField(Class<T> entityClass, String field, V value) {
@@ -106,6 +128,4 @@ public abstract class BaseService<T> {
     public abstract JsonObject getById(int id);
 
     public abstract JsonObject getByName(String name);
-
-
 }
