@@ -5,8 +5,11 @@ import jakarta.json.JsonObject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.clevacart.dto.RecipeFilterDTO;
 import org.clevacart.service.RecipeService;
 import org.clevacart.dto.RecipeDTO;
+
+import java.util.List;
 
 @Path("/recipes")
 public class RecipeResource {
@@ -16,6 +19,25 @@ public class RecipeResource {
     @Inject
     RecipeDTO recipeDTO;
 
+    @Inject
+    RecipeFilterDTO recipeFilterDTO;
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecipe(@QueryParam("id") Integer id,
+                              @QueryParam("name") String name,
+                              @QueryParam("allergenIds") List<Integer> allergenIds) {
+
+        recipeFilterDTO.setId(id);
+        recipeFilterDTO.setName(name);
+        recipeFilterDTO.setAllergenIds(allergenIds);
+
+        // Pass the filter to the service
+        JsonObject recipes = recipeService.getByFilters(recipeFilterDTO);
+        return Response.ok(recipes).build();
+    }
+
+    @Path("/all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipes() {
@@ -31,10 +53,10 @@ public class RecipeResource {
         return Response.ok(recipes).build();
     }
 
-    @Path("/get-by-name")
+    @Path("/get-by-name/{name}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecipeByName(@QueryParam("name") String name) {
+    public Response getRecipeByName(@PathParam("name") String name) {
         JsonObject recipe = recipeService.getByName(name);
         return Response.ok(recipe).build();
     }

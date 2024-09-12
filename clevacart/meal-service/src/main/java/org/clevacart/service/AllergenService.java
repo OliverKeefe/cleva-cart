@@ -8,6 +8,7 @@ import jakarta.json.JsonObjectBuilder;
 import org.clevacart.entity.AllergenEntity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -60,4 +61,5 @@ public class AllergenService extends BaseService<AllergenEntity> {
             return createJsonError("Allergen not found");
         }
     }
+
 }

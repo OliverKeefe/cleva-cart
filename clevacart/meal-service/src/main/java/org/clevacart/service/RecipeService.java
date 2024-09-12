@@ -15,10 +15,13 @@ import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import org.clevacart.dto.IngredientDTO;
 import org.clevacart.dto.RecipeDTO;
+import org.clevacart.dto.RecipeFilterDTO;
 import org.clevacart.entity.IngredientEntity;
 import org.clevacart.entity.RecipeEntity;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -105,6 +108,8 @@ public class RecipeService extends BaseService<RecipeEntity> {
                 .add("recipes", jsonArrayBuilder));
     }
 
+
+
     public JsonObject getByIngredients(int ingredientId) {
         Optional<RecipeEntity> recipeOpt = findSingleEntityByField(RecipeEntity.class, "ingredients", ingredientId);
 
@@ -168,5 +173,53 @@ public class RecipeService extends BaseService<RecipeEntity> {
                 .add("cooking_instructions", recipe.getCookingInstructions())
                 .add("ingredients", recipe.getIngredients().toString())
         );
+    }
+
+    public JsonObject getByFilters(RecipeFilterDTO filter) {
+        Map<String, Object> filters = new HashMap<>();
+
+        if (filter.getId() != null) {
+            filters.put("id", filter.getId());
+        }
+
+        if (filter.getName() != null) {
+            filters.put("name", filter.getName());
+        }
+
+        if (filter.getAllergenIds() != null && !filter.getAllergenIds().isEmpty()) {
+            filters.put("allergenIds", filter.getAllergenIds());
+        }
+        Optional<List<RecipeEntity>> recipes = findEntity(RecipeEntity.class, filters);
+
+
+        if (recipes.isPresent() && !recipes.get().isEmpty()) {
+            JsonArrayBuilder recipesJsonArrayBuilder = Json.createArrayBuilder();
+
+            for (RecipeEntity recipe : recipes.get()) {
+                JsonArrayBuilder ingredientJsonArrayBuilder = Json.createArrayBuilder();
+
+                for (IngredientEntity ingredient : recipe.getIngredients()) {
+                    JsonObject ingredientJson = Json.createObjectBuilder()
+                            .add("id", ingredient.getId())
+                            .add("name", ingredient.getName())
+                            .build();
+                    ingredientJsonArrayBuilder.add(ingredientJson);
+                }
+
+                JsonObject recipeJson = Json.createObjectBuilder()
+                        .add("id", recipe.getId())
+                        .add("name", recipe.getName())
+                        .add("cooking_instructions", recipe.getCookingInstructions())
+                        .add("ingredients", ingredientJsonArrayBuilder)
+                        .build();
+
+                recipesJsonArrayBuilder.add(recipeJson);
+            }
+            return createJson(Json.createObjectBuilder()
+                    .add("recipes", recipesJsonArrayBuilder));
+        } else {
+            // Return an error if no recipes were found
+            return createJsonError("No recipes found with the specified filters.");
+        }
     }
 }
