@@ -26,7 +26,7 @@ resource "docker_container" "mysql" {
 
   env = [
     "MYSQL_ROOT_PASSWORD=top-secret-pw",
-    "MYSQL_DATABASE=devappdb",
+    "MYSQL_DATABASE=MealServiceDB",
     "MYSQL_USER=user1",
     "MYSQL_PASSWORD=secretpw"
   ]
