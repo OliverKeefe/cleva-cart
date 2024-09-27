@@ -18,7 +18,7 @@ public class IngredientEntity extends BaseEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "Ingredient_Nutrient",
+            name = "IngredientNutrient",
             joinColumns = @JoinColumn(name = "ingredient_id"),
             inverseJoinColumns = @JoinColumn(name = "nutrient_id")
     )
@@ -26,7 +26,7 @@ public class IngredientEntity extends BaseEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "Ingredient_Allergen",
+            name = "IngredientAllergen",
             joinColumns = @JoinColumn(name = "ingredient_id"),
             inverseJoinColumns = @JoinColumn(name = "allergen_id")
     )

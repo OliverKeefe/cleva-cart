@@ -7,11 +7,6 @@ CREATE TABLE Allergen (
     name VARCHAR(25) NOT NULL
 );
 
-INSERT INTO Allergen (name)
-VALUES
-    ('Fish'),
-    ('Gluten');
-
 -- Major Allergen Table, includes the 18 major allergens.
 CREATE TABLE MajorAllergen (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,6 +31,23 @@ VALUES
     ('Soya'),
     ('Sulphites'),
     ('No Major Allergen');
+
+INSERT INTO Allergen (name)
+VALUES
+    ('Gluten'),
+    ('Celery'),
+    ('Crustaceans'),
+    ('Eggs'),
+    ('Fish'),
+    ('Lupin'),
+    ('Milk'),
+    ('Molluscs'),
+    ('Mustard'),
+    ('Nuts'),
+    ('Peanuts'),
+    ('Sesame'),
+    ('Soya'),
+    ('Sulphites');
 
 -- Nutrient Table, includes Vitamins, Minerals, Water Content etc...
 CREATE TABLE Nutrient (
@@ -105,6 +117,7 @@ CREATE TABLE Recipe (
     id INT AUTO_INCREMENT,
     name VARCHAR(35) NOT NULL,
     cooking_instructions TEXT,
+
     PRIMARY KEY(id)
 );
 

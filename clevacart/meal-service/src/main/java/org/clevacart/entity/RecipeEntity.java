@@ -29,7 +29,7 @@ public class RecipeEntity extends BaseEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "Recipe_Ingredient",
+            name = "RecipeIngredient",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
