@@ -14,27 +14,24 @@ import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
+@Path("/token")
 public class TokenResource {
-
-    private final SecurityIdentity securityIdentity;
-
-    public TokenResource(SecurityIdentity securityIdentity) {
-        this.securityIdentity = securityIdentity;
-    }
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     public Response generateToken() {
-        Set<String> roles = new HashSet<>(securityIdentity.getRoles());
+        // Hardcoded values for testing
+        String username = "testUser";
+        Set<String> roles = new HashSet<>();
+        roles.add("User");
 
         String token = Jwt
                 .issuer("https://clevacart.com")
-                .subject(securityIdentity.getPrincipal().getName())
+                .subject(username)
                 .groups(roles)
                 .expiresIn(Duration.ofHours(2))
                 .sign();
 
         return Response.ok(token).build();
     }
-
 }
