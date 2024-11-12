@@ -16,7 +16,7 @@ resource "docker_image" "mysql" {
 }
 
 resource "docker_container" "mysql" {
-  name  = "mysql-container"
+  name  = "MealServiceDatabaseImage"
   image = docker_image.mysql.image_id
 
   ports {

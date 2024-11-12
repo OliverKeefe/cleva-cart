@@ -3,6 +3,7 @@ package org.clevacart;
 import io.quarkus.test.junit.QuarkusTest;
 import org.clevacart.dto.LoginRequestDTO;
 import org.clevacart.entity.UserEntity;
+import org.clevacart.resource.LoginResource;
 import org.clevacart.service.LoginService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

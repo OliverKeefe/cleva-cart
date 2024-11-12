@@ -5,50 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d75c4bff-f263-423f-96b9-94065c4bc57c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/md5-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/dependencies-accessors/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/8.8/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/46b6c8fb-b484-4d04-9c7e-78a81f0c5100.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/46b6c8fb-b484-4d04-9c7e-78a81f0c5100/storage_v2/_src_/schema/ApplicationDatabase.y_Jo3Q.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/46b6c8fb-b484-4d04-9c7e-78a81f0c5100/storage_v2/_src_/schema/devappdb.akOyQQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/meal-service.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/build-analytics-event.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/build-metrics.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/46b6c8fb-b484-4d04-9c7e-78a81f0c5100.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/46b6c8fb-b484-4d04-9c7e-78a81f0c5100.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/meal-service.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/meal-service.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/org/clevacart/resource/AuthResource.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/test/java/org/clevacart/LoginResourceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/test/java/org/clevacart/LoginResourceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meal-service-database/main.tf" beforeDir="false" afterPath="$PROJECT_DIR$/meal-service-database/main.tf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meal-service-database/terraform.tfstate" beforeDir="false" afterPath="$PROJECT_DIR$/meal-service-database/terraform.tfstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meal-service-database/terraform.tfstate.backup" beforeDir="false" afterPath="$PROJECT_DIR$/meal-service-database/terraform.tfstate.backup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meal-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/meal-service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meal-service/src/main/java/org/clevacart/resource/RecipeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/meal-service/src/main/java/org/clevacart/resource/RecipeResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meal-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/meal-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,12 +86,25 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTTP Request" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;OliverKeefe&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/OliverKeefe/cleva-cart.git&quot;,
+    &quot;accountId&quot;: &quot;2cef3975-8523-4796-a96f-dda8abaa431e&quot;
+  }
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -140,11 +126,14 @@
     &quot;Database Script.setup.sql.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
     &quot;Gradle.Build app-service.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build auth-service.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Build clevacart.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Build meal-service.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.All in GetRecipe.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.All in generated-requests.executor&quot;: &quot;Run&quot;,
     &quot;Quarkus.app-service.main.executor&quot;: &quot;Run&quot;,
+    &quot;Quarkus.auth-service.main.executor&quot;: &quot;Run&quot;,
     &quot;Quarkus.clevacart.main.executor&quot;: &quot;Run&quot;,
     &quot;Quarkus.meal-service.main (1).executor&quot;: &quot;Run&quot;,
     &quot;Quarkus.meal-service.main.executor&quot;: &quot;Run&quot;,
@@ -156,6 +145,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/oliver/Development/cleva-cart/clevacart/meal-service/src/main/resources/META-INF/keys&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -178,6 +168,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/meal-service/src/main/resources/META-INF/keys" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -193,6 +188,9 @@
       <script-mode>FILE</script-mode>
       <data-source id="46b6c8fb-b484-4d04-9c7e-78a81f0c5100" namespace="schema/&quot;devappdb&quot;" />
       <data-source id="46b6c8fb-b484-4d04-9c7e-78a81f0c5100" />
+      <method v="2" />
+    </configuration>
+    <configuration name="All in GetRecipe" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/REST-Test/meal-service-rt/GetRecipe.http">
       <method v="2" />
     </configuration>
     <configuration name="All in generated-requests" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http">
@@ -264,7 +262,9 @@
             <list />
           </option>
           <option name="taskNames">
-            <list />
+            <list>
+              <option value="quarkusDev" />
+            </list>
           </option>
           <option name="vmOptions" />
         </ExternalSystemSettings>
@@ -440,6 +440,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="org.clevacart.meal-service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
+      <module name="org.clevacart.meal-service.main" />
+      <QsGradleRunConfiguration>
+        <ExternalSystemSettings>
+          <option name="executionName" />
+          <option name="externalProjectPath" value="$PROJECT_DIR$/meal-service" />
+          <option name="externalSystemIdString" value="GRADLE" />
+          <option name="scriptParameters" />
+          <option name="taskDescriptions">
+            <list />
+          </option>
+          <option name="taskNames">
+            <list />
+          </option>
+          <option name="vmOptions" />
+        </ExternalSystemSettings>
+        <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+        <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+        <DebugAllEnabled>false</DebugAllEnabled>
+        <RunAsTest>false</RunAsTest>
+        <profile>dev</profile>
+      </QsGradleRunConfiguration>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="shopping-service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
       <module name="shopping-service.main" />
       <QsGradleRunConfiguration>
@@ -509,22 +535,25 @@
     </configuration>
     <list>
       <item itemvalue="Database Script.setup.sql" />
+      <item itemvalue="HTTP Request.All in GetRecipe" />
       <item itemvalue="HTTP Request.All in generated-requests" />
-      <item itemvalue="Quarkus.auth-service.main" />
-      <item itemvalue="Quarkus.meal-service.main (1)" />
-      <item itemvalue="Quarkus.meal-service.main" />
       <item itemvalue="Quarkus.app-service.main" />
       <item itemvalue="Quarkus.appsrvs.main" />
+      <item itemvalue="Quarkus.auth-service.main" />
       <item itemvalue="Quarkus.clevacart.main" />
       <item itemvalue="Quarkus.demo.main" />
+      <item itemvalue="Quarkus.meal-service.main (1)" />
+      <item itemvalue="Quarkus.meal-service.main" />
       <item itemvalue="Quarkus.org.clevacart.app-service-test.main" />
       <item itemvalue="Quarkus.org.clevacart.app-service.main" />
+      <item itemvalue="Quarkus.org.clevacart.meal-service.main" />
       <item itemvalue="Quarkus.shopping-service.main" />
       <item itemvalue="Quarkus.user-service.main" />
       <item itemvalue="Shell Script.gradlew" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.All in GetRecipe" />
         <item itemvalue="Database Script.setup.sql" />
         <item itemvalue="HTTP Request.All in generated-requests" />
         <item itemvalue="Shell Script.gradlew" />
@@ -534,8 +563,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -574,6 +603,12 @@
       <workItem from="1727440969529" duration="4036000" />
       <workItem from="1727483525494" duration="1201000" />
       <workItem from="1728409923539" duration="181000" />
+      <workItem from="1730299814317" duration="1474000" />
+      <workItem from="1730301298963" duration="1833000" />
+      <workItem from="1730732041175" duration="628000" />
+      <workItem from="1730735708224" duration="1000" />
+      <workItem from="1730815694802" duration="5746000" />
+      <workItem from="1731420231388" duration="836000" />
     </task>
     <servers />
   </component>

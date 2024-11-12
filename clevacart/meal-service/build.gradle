@@ -26,6 +26,8 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
     implementation 'javax.persistence:javax.persistence-api:2.2'
 
+    implementation 'io.quarkus:quarkus-smallrye-jwt'
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }

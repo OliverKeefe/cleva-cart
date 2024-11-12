@@ -1,5 +1,8 @@
 package org.clevacart.resource;
 
+import io.quarkus.security.Authenticated;
+import io.quarkus.security.identity.SecurityIdentity;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
 import jakarta.ws.rs.*;
@@ -12,6 +15,7 @@ import org.clevacart.dto.RecipeDTO;
 import java.util.List;
 
 @Path("/recipes")
+@RolesAllowed("User")
 public class RecipeResource {
     @Inject
     RecipeService recipeService;
@@ -22,11 +26,18 @@ public class RecipeResource {
     @Inject
     RecipeFilterDTO recipeFilterDTO;
 
+    @Inject
+    SecurityIdentity identity;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipe(@QueryParam("id") Integer id,
                               @QueryParam("name") String name,
                               @QueryParam("allergenIds") List<Integer> allergenIds) {
+
+        if (identity.isAnonymous()) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
 
         recipeFilterDTO.setId(id);
         recipeFilterDTO.setName(name);
